@@ -5,29 +5,39 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 
+// Importa tu router de servicios
+const serviciosRouter = require("./routes/servicio.routes.js");
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Conexión a MongoDB
-mongoose.connect(process.env.MONGO_URI)
+// Conexión a MongoDB Atlas (incluye opciones para evitar warnings)
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(() => console.log("✅ Conectado a MongoDB Atlas"))
   .catch((err) => {
     console.error("❌ Error conectando a MongoDB:", err.message);
     process.exit(1);
   });
 
-// Middlewares
+// Middlewares globales
 app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
 
-// Ruta básica de prueba
+// Rutas
+// Ruta raíz de prueba
 app.get("/", (req, res) => {
   res.send("🎉 API de la Peluquería funcionando correctamente!");
 });
 
-// Iniciar servidor
+// Monta el router de servicios
+app.use("/api/servicios", serviciosRouter);
+
+// Arranca el servidor
 app.listen(PORT, () => {
   console.log(`🚀 Servidor escuchando en http://localhost:${PORT}`);
 });
