@@ -37,6 +37,12 @@ app.get("/", (req, res) => {
 // Monta el router de servicios
 app.use("/api/servicios", serviciosRouter);
 
+// 404 para rutas no definidas
+app.use((req, res) => {
+  res.status(404).json({ error: 'Ruta no encontrada' });
+});
+
+
 // Arranca el servidor
 app.listen(PORT, () => {
   console.log(`🚀 Servidor escuchando en http://localhost:${PORT}`);
