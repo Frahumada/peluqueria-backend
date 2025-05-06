@@ -6,7 +6,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 
 // Importa tu router de servicios
-const serviciosRouter = require("./routes/servicio.routes.js");
+const pricesRouter = require("./routes/pricing.routes.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,8 +34,8 @@ app.get("/", (req, res) => {
   res.send("🎉 API de la Peluquería funcionando correctamente!");
 });
 
-// Monta el router de servicios
-app.use("/api/servicios", serviciosRouter);
+// Monta el router de prices
+app.use("/api/precios", pricesRouter);
 
 // 404 para rutas no definidas
 app.use((req, res) => {

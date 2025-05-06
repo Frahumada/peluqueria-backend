@@ -10,28 +10,29 @@
 
 const express = require('express');
 const router = express.Router();
-const Servicio = require('../models/Servicio');
+const Price = require('../models/Pricing');
 
-// GET /api/servicios
+// GET /api/precios
 router.get('/', async (req, res) => {
+  console.log('🔥  GET /api/precios entró al handler');
   try {
-    const servicios = await Servicio.find();
-    res.json(servicios);
+    const prices = await Price.find();
+    return res.json(prices);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error al obtener servicios' });
+    return res.status(500).json({ error: 'Error al obtener precios' });
   }
 });
 
 // Crear un servicio
 router.post('/', async (req, res) => {
     try {
-      const nuevo = new Servicio(req.body);
+      const nuevo = new Price(req.body);
       const guardado = await nuevo.save();
       res.status(201).json(guardado);
     } catch (err) {
       console.error(err);
-      res.status(400).json({ error: 'Error al crear servicio' });
+      res.status(400).json({ error: 'Error al crear precio' });
     }
   });
 

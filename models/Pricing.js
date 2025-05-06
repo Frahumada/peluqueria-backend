@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const servicioSchema = new mongoose.Schema({
+const pricingSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
   descripcion: String,
   precio: { type: Number, required: true },
@@ -8,4 +8,4 @@ const servicioSchema = new mongoose.Schema({
   imagenUrl: String
 });
 
-module.exports = mongoose.model('Servicio', servicioSchema);
+module.exports = mongoose.model('price', pricingSchema);
