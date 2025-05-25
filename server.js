@@ -9,7 +9,7 @@ const morgan = require("morgan");
 const pricesRouter = require("./routes/pricing.routes.js");
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 // Conexión a MongoDB Atlas (incluye opciones para evitar warnings)
 mongoose.connect(process.env.MONGO_URI, {
